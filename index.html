@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VietMove AI is an early-stage multimodal travel platform for Vietnam, exploring bus, train, flight, housing and moving-service integrations." />
+  <title>VietMove AI — Multimodal Travel for Vietnam</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: rgba(255,255,255,0.07);
+      --card-border: rgba(255,255,255,0.12);
+      --text: #f8fafc;
+      --muted: #a7b0c0;
+      --primary: #60a5fa;
+      --secondary: #34d399;
+      --accent: #f59e0b;
+      --shadow: 0 24px 60px rgba(0,0,0,.28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(96,165,250,.18), transparent 32%),
+        radial-gradient(circle at 88% 18%, rgba(52,211,153,.14), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+    }
+
+    .brand { display: flex; gap: 10px; align-items: center; font-weight: 800; letter-spacing: .2px; }
+    .brand-mark {
+      width: 36px; height: 36px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: grid; place-items: center; color: #07111f; font-weight: 900;
+      box-shadow: var(--shadow);
+    }
+
+    .status {
+      display: inline-flex; gap: 8px; align-items: center;
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(52,211,153,.08); border: 1px solid rgba(52,211,153,.22);
+      color: #bbf7d0; font-size: 14px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--secondary); }
+
+    .hero {
+      padding: 88px 0 64px;
+      display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center;
+    }
+
+    h1 { font-size: clamp(42px, 7vw, 78px); line-height: 1.02; margin: 18px 0 22px; letter-spacing: -2.5px; }
+    h1 span { background: linear-gradient(90deg, #93c5fd, #6ee7b7); -webkit-background-clip: text; color: transparent; }
+    .lead { font-size: 20px; color: var(--muted); max-width: 760px; }
+
+    .actions { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 0 20px; border-radius: 14px;
+      font-weight: 700; border: 1px solid var(--card-border);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.28); }
+    .btn-primary { background: linear-gradient(135deg, #60a5fa, #34d399); color: #07111f; border: 0; }
+    .btn-secondary { background: rgba(255,255,255,.04); }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid var(--card-border); border-radius: 24px; padding: 24px;
+      box-shadow: var(--shadow); backdrop-filter: blur(10px);
+    }
+
+    .route-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; }
+    .place { padding: 16px; background: rgba(255,255,255,.04); border-radius: 16px; }
+    .place small { color: var(--muted); display: block; }
+    .arrow { color: var(--primary); font-size: 24px; }
+
+    .modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .mode { padding: 16px; border-radius: 16px; background: rgba(255,255,255,.04); text-align: center; }
+    .mode strong { display: block; margin-top: 6px; }
+    .mode small { color: var(--muted); }
+
+    section { padding: 64px 0; }
+    .eyebrow { color: #93c5fd; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; font-size: 13px; }
+    h2 { font-size: clamp(30px, 5vw, 48px); margin: 8px 0 14px; letter-spacing: -1.2px; }
+    .section-copy { color: var(--muted); max-width: 760px; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
+    .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 20px; padding: 22px; }
+    .icon { font-size: 28px; margin-bottom: 12px; }
+    .card h3 { margin: 0 0 8px; }
+    .card p { color: var(--muted); margin: 0; }
+
+    .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+    .step { position: relative; overflow: hidden; }
+    .step::after {
+      content: ""; position: absolute; inset: auto -30px -30px auto;
+      width: 100px; height: 100px; border-radius: 50%; background: rgba(96,165,250,.08);
+    }
+    .step-num { color: #bfdbfe; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+
+    .contact {
+      display: flex; justify-content: space-between; gap: 24px; align-items: center;
+      padding: 30px; border-radius: 24px;
+      background: linear-gradient(135deg, rgba(96,165,250,.12), rgba(52,211,153,.10));
+      border: 1px solid var(--card-border);
+    }
+
+    footer { padding: 34px 0 44px; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 56px; }
+      .grid, .roadmap { grid-template-columns: 1fr; }
+      .contact { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(100% - 26px, 1120px); }
+      nav .status { display: none; }
+      .modes { grid-template-columns: 1fr; }
+      .route-row { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <div class="brand"><div class="brand-mark">V</div> VietMove AI</div>
+      <div class="status"><span class="dot"></span> Early development</div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Multimodal travel • Vietnam</div>
+          <h1>Plan the whole journey, <span>not just one ticket.</span></h1>
+          <p class="lead">
+            VietMove AI is an early-stage platform exploring a unified way to search and compare buses,
+            sleeper buses, trains, and domestic flights across Vietnam — with future support for housing
+            and moving-service integration.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#project">View project scope</a>
+            <a class="btn btn-secondary" href="mailto:your-email@example.com">Contact</a>
+          </div>
+        </div>
+
+        <div class="panel" aria-label="Example travel search">
+          <div class="route-row">
+            <div class="place"><small>From</small><strong>Hanoi</strong></div>
+            <div class="arrow">→</div>
+            <div class="place"><small>To</small><strong>Da Nang</strong></div>
+          </div>
+          <div class="modes">
+            <div class="mode"><div>🚌</div><strong>Sleeper bus</strong><small>Compare operators</small></div>
+            <div class="mode"><div>🚆</div><strong>Train</strong><small>Seat & berth options</small></div>
+            <div class="mode"><div>✈️</div><strong>Flight</strong><small>Fare comparison</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="project">
+        <div class="eyebrow">Project scope</div>
+        <h2>One interface for multiple transport modes</h2>
+        <p class="section-copy">
+          The project is currently in the provider-evaluation and system-design stage. We are researching
+          transportation APIs and partner platforms that can support route search, schedules, realtime prices,
+          availability, seat or berth information, and future booking workflows.
+        </p>
+
+        <div class="grid">
+          <article class="card"><div class="icon">🚌</div><h3>Bus & sleeper bus</h3><p>Operator comparison, schedule search, vehicle class, sleeper/cabin details and seat availability.</p></article>
+          <article class="card"><div class="icon">🚆</div><h3>Rail</h3><p>Vietnam rail routes, carriage classes, seats and sleeper berths with normalized pricing.</p></article>
+          <article class="card"><div class="icon">✈️</div><h3>Domestic flights</h3><p>Flight offers, fare conditions, baggage information and price revalidation before booking.</p></article>
+        </div>
+      </section>
+
+      <section>
+        <div class="eyebrow">Current stage</div>
+        <h2>Built carefully from provider integration upward</h2>
+        <div class="roadmap">
+          <article class="card step"><div class="step-num">01 · NOW</div><h3>API evaluation</h3><p>Validate providers for Vietnam coverage, sandbox access, search, availability and booking capability.</p></article>
+          <article class="card step"><div class="step-num">02 · NEXT</div><h3>MVP integration</h3><p>Normalize offers from selected providers behind a single transport-service interface.</p></article>
+          <article class="card step"><div class="step-num">03 · LATER</div><h3>AI-assisted planning</h3><p>Combine transport with housing, maps and moving services for end-to-end relocation planning.</p></article>
+        </div>
+      </section>
+
+      <section>
+        <div class="contact">
+          <div>
+            <div class="eyebrow">Partner integration</div>
+            <h2 style="margin-bottom:8px">Open to transport API partnerships</h2>
+            <p class="section-copy" style="margin:0">We are currently evaluating multimodal inventory and booking providers for a Vietnam-focused MVP.</p>
+          </div>
+          <a class="btn btn-primary" href="mailto:your-email@example.com">Get in touch</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>© 2026 VietMove AI · Early-stage project · Vietnam</footer>
+  </div>
+</body>
+</html>
